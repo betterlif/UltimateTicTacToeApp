@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Saishrey/AndroidStudioProjects/UltimateTicTacToe/app/src/main/res/drawable/round_back_blue_border.xml" value="0.1" />
         <entry key="..\:/Users/Saishrey/AndroidStudioProjects/UltimateTicTacToe/app/src/main/res/drawable/round_black_blue1000.xml" value="0.1" />
         <entry key="..\:/Users/Saishrey/AndroidStudioProjects/UltimateTicTacToe/app/src/main/res/layout/activity_add_players.xml" value="0.2563405797101449" />
+        <entry key="..\:/Users/Saishrey/AndroidStudioProjects/UltimateTicTacToe/app/src/main/res/layout/activity_main.xml" value="0.18224789915966386" />
       </map>
     </option>
   </component>
