@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.provider.ContactsContract;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Multiplayer");
         setContentView(R.layout.activity_main);
 
         playerOneName = findViewById(R.id.player_one_name);
@@ -265,15 +267,15 @@ public class MainActivity extends AppCompatActivity {
         scoreCard.setText(playerOneScore + " - " + playerTwoScore);
     }
 
-    public void exit() {
-        finish();
-        System.exit(0);
-    }
-
     public void goToMenu() {
         Intent intent = new Intent(MainActivity.this, MainMenu.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
+        if(Build.VERSION.SDK_INT>=16 && Build.VERSION.SDK_INT<21){
+            finishAffinity();
+        } else if(Build.VERSION.SDK_INT>=21){
+            finishAndRemoveTask();
+        }
     }
+
 }

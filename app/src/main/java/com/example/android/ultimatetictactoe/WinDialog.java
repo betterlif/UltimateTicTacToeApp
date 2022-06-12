@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -54,7 +55,11 @@ public class WinDialog extends Dialog {
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.exit();
+                if(Build.VERSION.SDK_INT>=16 && Build.VERSION.SDK_INT<21){
+                    getOwnerActivity().finishAffinity();
+                } else if(Build.VERSION.SDK_INT>=21){
+                    getOwnerActivity().finishAndRemoveTask();
+                }
                 dismiss();
             }
         });

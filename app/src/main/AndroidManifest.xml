@@ -14,12 +14,12 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainMenu"/>
         <activity
             android:screenOrientation="portrait"
             android:name=".MainMenu"
-            android:exported="true"
-            android:noHistory="true">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
