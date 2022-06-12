@@ -8,71 +8,98 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_above="@+id/container"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/container"
+        android:layout_alignParentTop="true"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/player_one_layout"
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_back_dark_blue"
-            android:orientation="vertical"
-            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
             android:gravity="center">
 
-            <TextView
-                android:maxLines="1"
-                android:id="@+id/player_one_name"
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/player_one_layout"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:text="Player One"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:gravity="center"/>
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/round_back_dark_blue"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:src="@drawable/cross_icon"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"/>
+                <TextView
+                    android:id="@+id/player_one_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Player One"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/cross_icon" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/player_two_layout"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/round_back_dark_blue"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/player_two_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Player Two"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/zero_icon" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/player_two_layout"
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_back_dark_blue"
-            android:orientation="vertical"
-            android:layout_marginStart="10dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
             android:gravity="center">
 
             <TextView
                 android:maxLines="1"
-                android:id="@+id/player_two_name"
-                android:layout_marginTop="20dp"
+                android:id="@+id/score_card"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Player Two"
+                android:layout_height="match_parent"
+                android:text="0 - 0"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:gravity="center"/>
+                android:textSize="26sp"
+                android:gravity="center_horizontal"/>
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_gravity="center"
-                android:layout_height="40dp"
-                android:src="@drawable/zero_icon"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"/>
         </LinearLayout>
     </LinearLayout>
 

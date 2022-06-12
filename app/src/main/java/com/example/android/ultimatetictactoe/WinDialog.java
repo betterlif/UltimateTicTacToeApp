@@ -38,7 +38,7 @@ public class WinDialog extends Dialog {
         startAgainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.restartMatch();
+                mainActivity.startGame();
                 dismiss();
             }
         });

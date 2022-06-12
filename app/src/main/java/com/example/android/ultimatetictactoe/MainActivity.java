@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final List<int[]> combinationsList = new ArrayList<>();
 
-    private int[] boxPositions = new int[9];
+    private int[] boxPositions;
 
     private int playerTurn = 1;
 
@@ -27,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
     private final String player1 = "Player 1", player2 = "Player 2";
 
     private LinearLayout playerOneLayout, playerTwoLayout;
-    private TextView playerOneName,  playerTwoName;
+    private TextView playerOneName,  playerTwoName, scoreCard;
     private ImageView image1, image2, image3, image4, image5, image6, image7, image8, image9;
+    private int playerOneScore = 0, playerTwoScore = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
         playerOneName = findViewById(R.id.player_one_name);
         playerTwoName = findViewById(R.id.player_two_name);
+        scoreCard = findViewById(R.id.score_card);
 
         playerOneLayout = findViewById(R.id.player_one_layout);
         playerTwoLayout = findViewById(R.id.player_two_layout);
-
-        playerOneLayout.setBackgroundResource(R.drawable.round_back_blue_border);
 
         image1 = findViewById(R.id.image1);
         image2 = findViewById(R.id.image2);
@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
         playerOneName.setText(player1);
         playerTwoName.setText(player2);
+
+        startGame();
 
         image1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageResource(R.drawable.cross_icon);
 
             if(checkPlayerWin()) {
+                playerOneScore++;
+                setScore();
                 WinDialog winDialog = new WinDialog(MainActivity.this, player1 + " wins.", MainActivity.this);
                 winDialog.setCancelable(false);
                 winDialog.show();
@@ -172,6 +176,8 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageResource(R.drawable.zero_icon);
 
             if(checkPlayerWin()) {
+                playerTwoScore++;
+                setScore();
                 WinDialog winDialog = new WinDialog(MainActivity.this, player2 + " wins.", MainActivity.this);
                 winDialog.setCancelable(false);
                 winDialog.show();
@@ -220,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
         return boxPositions[boxPosition] == 0;
     }
 
-    public void restartMatch() {
+    public void startGame() {
         boxPositions = new int[9];
 
         playerTurn = 1;
@@ -238,10 +244,15 @@ public class MainActivity extends AppCompatActivity {
         image9.setImageResource(R.drawable.transparent_background);
 
         playerOneLayout.setBackgroundResource(R.drawable.round_back_blue_border);
+        playerTwoLayout.setBackgroundResource(R.drawable.round_back_dark_blue);
+    }
+
+    private void setScore() {
+        scoreCard.setText(playerOneScore + " - " + playerTwoScore);
     }
 
     public void exit() {
-        finishAffinity();
+        finish();
         System.exit(0);
     }
 
