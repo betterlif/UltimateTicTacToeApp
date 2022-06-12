@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView playerOneName,  playerTwoName, scoreCard;
     private ImageView image1, image2, image3, image4, image5, image6, image7, image8, image9;
     private int playerOneScore = 0, playerTwoScore = 0;
+
+    private Vibrator myVib;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         combinationsList.add(new int[]{0, 4, 8});
         combinationsList.add(new int[]{2, 4, 6});
 
+        myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
+
         playerOneName.setText(player1);
         playerTwoName.setText(player2);
 
@@ -70,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         image1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myVib.vibrate(50);
                 if(isBoxSelectable(0)) {
                     performAction((ImageView)view, 0);
                 }
@@ -79,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         image2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myVib.vibrate(50);
                 if(isBoxSelectable(1)) {
                     performAction((ImageView)view, 1);
                 }
@@ -88,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         image3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myVib.vibrate(50);
                 if(isBoxSelectable(2)) {
                     performAction((ImageView)view, 2);
                 }
@@ -97,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         image4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myVib.vibrate(50);
                 if(isBoxSelectable(3)) {
                     performAction((ImageView)view, 3);
                 }
@@ -106,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         image5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myVib.vibrate(50);
                 if(isBoxSelectable(4)) {
                     performAction((ImageView)view, 4);
                 }
@@ -115,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         image6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myVib.vibrate(50);
                 if(isBoxSelectable(5)) {
                     performAction((ImageView)view, 5);
                 }
@@ -124,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
         image7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myVib.vibrate(50);
                 if(isBoxSelectable(6)) {
                     performAction((ImageView)view, 6);
                 }
@@ -133,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         image8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myVib.vibrate(50);
                 if(isBoxSelectable(7)) {
                     performAction((ImageView)view, 7);
                 }
@@ -142,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
         image9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myVib.vibrate(50);
                 if(isBoxSelectable(8)) {
                     performAction((ImageView)view, 8);
                 }
