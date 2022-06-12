@@ -3,7 +3,7 @@
 <table style="border-colapse: colapse;">
   <tr>
     <th>Main Menu</th>
-    <th>Gameplay</th>
+    <th>Multiplayer Gameplay</th>
     <th>Game over</th>
   </tr>
   <tr>
