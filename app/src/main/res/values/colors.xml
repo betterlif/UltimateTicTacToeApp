@@ -12,4 +12,9 @@
     <color name="light_white">#80FFFFFF</color>
     <color name="purple">#6648C3</color>
 
+    <color name="theme_blue">#2493DF</color>
+    <color name="theme_red">#E14E40</color>
+    <color name="theme_green">#4DB14F</color>
+    <color name="theme_grey">#2D3846</color>
+
 </resources>
