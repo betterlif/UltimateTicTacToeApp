@@ -22,7 +22,9 @@ public class MainMenu extends AppCompatActivity {
         aiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainMenu.this, "Feature is currently in development.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainMenu.this, MainActivity.class);
+                intent.putExtra("AI_SELECTED", true);
+                startActivity(intent);
             }
         });
 
@@ -30,6 +32,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainMenu.this, MainActivity.class);
+                intent.putExtra("AI_SELECTED", false);
                 startActivity(intent);
             }
         });

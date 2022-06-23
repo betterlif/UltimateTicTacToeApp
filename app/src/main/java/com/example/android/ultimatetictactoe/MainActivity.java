@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.provider.ContactsContract;
 import android.view.View;
@@ -14,32 +15,53 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private final List<int[]> combinationsList = new ArrayList<>();
 
-    private int[] boxPositions;
+    private volatile int[] boxPositions;
 
-    private int playerTurn = 1;
+    private volatile int playerTurn = 1;
 
-    private int totalSelectedBoxes = 1;
+    private volatile int totalSelectedBoxes = 1;
 
-    private final String player1 = "Player 1", player2 = "Player 2";
+    private String player1, player2;
 
     private LinearLayout playerOneLayout, playerTwoLayout;
     private TextView playerOneName,  playerTwoName, scoreCard;
-    private ImageView image1, image2, image3, image4, image5, image6, image7, image8, image9;
-    private int playerOneScore = 0, playerTwoScore = 0;
+    private volatile ImageView image1, image2, image3, image4, image5, image6, image7, image8, image9;
+    private volatile int playerOneScore = 0, playerTwoScore = 0;
 
+    private boolean isAIselected;
     private Vibrator myVib;
+
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Multiplayer");
         setContentView(R.layout.activity_main);
+
+        Bundle extras = getIntent().getExtras();
+        isAIselected = extras.getBoolean("AI_SELECTED");
+        if(isAIselected) {
+            setTitle("Play against AI");
+            player1 = "AI";
+            player2 = "You";
+        }
+        else {
+            setTitle("Multiplayer");
+            player1 = "Player 1";
+            player2 = "Player 2";
+        }
 
         playerOneName = findViewById(R.id.player_one_name);
         playerTwoName = findViewById(R.id.player_two_name);
@@ -77,9 +99,14 @@ public class MainActivity extends AppCompatActivity {
         image1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myVib.vibrate(50);
                 if(isBoxSelectable(0)) {
-                    performAction((ImageView)view, 0);
+                    myVib.vibrate(50);
+                    if(isAIselected) {
+                        humansTurn((ImageView)view, 0);
+                    }
+                    else {
+                        performAction((ImageView)view, 0);
+                    }
                 }
             }
         });
@@ -87,9 +114,15 @@ public class MainActivity extends AppCompatActivity {
         image2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myVib.vibrate(50);
+
                 if(isBoxSelectable(1)) {
-                    performAction((ImageView)view, 1);
+                    myVib.vibrate(50);
+                    if(isAIselected) {
+                        humansTurn((ImageView)view, 1);
+                    }
+                    else {
+                        performAction((ImageView)view, 1);
+                    }
                 }
             }
         });
@@ -97,9 +130,15 @@ public class MainActivity extends AppCompatActivity {
         image3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myVib.vibrate(50);
+
                 if(isBoxSelectable(2)) {
-                    performAction((ImageView)view, 2);
+                    myVib.vibrate(50);
+                    if(isAIselected) {
+                        humansTurn((ImageView)view, 2);
+                    }
+                    else {
+                        performAction((ImageView)view, 2);
+                    }
                 }
             }
         });
@@ -107,9 +146,15 @@ public class MainActivity extends AppCompatActivity {
         image4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myVib.vibrate(50);
+
                 if(isBoxSelectable(3)) {
-                    performAction((ImageView)view, 3);
+                    myVib.vibrate(50);
+                    if(isAIselected) {
+                        humansTurn((ImageView)view, 3);
+                    }
+                    else {
+                        performAction((ImageView)view, 3);
+                    }
                 }
             }
         });
@@ -117,9 +162,15 @@ public class MainActivity extends AppCompatActivity {
         image5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myVib.vibrate(50);
+
                 if(isBoxSelectable(4)) {
-                    performAction((ImageView)view, 4);
+                    myVib.vibrate(50);
+                    if(isAIselected) {
+                        humansTurn((ImageView)view, 4);
+                    }
+                    else {
+                        performAction((ImageView)view, 4);
+                    }
                 }
             }
         });
@@ -127,9 +178,15 @@ public class MainActivity extends AppCompatActivity {
         image6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myVib.vibrate(50);
+
                 if(isBoxSelectable(5)) {
-                    performAction((ImageView)view, 5);
+                    myVib.vibrate(50);
+                    if(isAIselected) {
+                        humansTurn((ImageView)view, 5);
+                    }
+                    else {
+                        performAction((ImageView)view, 5);
+                    }
                 }
             }
         });
@@ -137,9 +194,15 @@ public class MainActivity extends AppCompatActivity {
         image7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myVib.vibrate(50);
+
                 if(isBoxSelectable(6)) {
-                    performAction((ImageView)view, 6);
+                    myVib.vibrate(50);
+                    if(isAIselected) {
+                        humansTurn((ImageView)view, 6);
+                    }
+                    else {
+                        performAction((ImageView)view, 6);
+                    }
                 }
             }
         });
@@ -147,9 +210,15 @@ public class MainActivity extends AppCompatActivity {
         image8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myVib.vibrate(50);
+
                 if(isBoxSelectable(7)) {
-                    performAction((ImageView)view, 7);
+                    myVib.vibrate(50);
+                    if(isAIselected) {
+                        humansTurn((ImageView)view, 7);
+                    }
+                    else {
+                        performAction((ImageView)view, 7);
+                    }
                 }
             }
         });
@@ -157,13 +226,110 @@ public class MainActivity extends AppCompatActivity {
         image9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myVib.vibrate(50);
+
                 if(isBoxSelectable(8)) {
-                    performAction((ImageView)view, 8);
+                    myVib.vibrate(50);
+                    if(isAIselected) {
+                        humansTurn((ImageView)view, 8);
+                    }
+                    else {
+                        performAction((ImageView)view, 8);
+                    }
                 }
             }
         });
     }
+
+    private List<Integer> getAvailableMoves() {
+        List<Integer> res = new ArrayList<>();
+        for(int i = 0; i < 9; i++) {
+            if(boxPositions[i] == 0) {
+                res.add(i);
+            }
+        }
+        return res;
+    }
+
+    private void humansTurn(ImageView imageView, int selectBoxPosition) {
+        boxPositions[selectBoxPosition] = playerTurn;
+        imageView.setImageResource(R.drawable.zero_icon);
+
+        if(checkPlayerWin()) {
+            playerTwoScore++;
+            setScore();
+            WinDialog winDialog = new WinDialog(MainActivity.this, player2 + " win.", MainActivity.this);
+            winDialog.setCancelable(false);
+            winDialog.show();
+        }
+        else if(totalSelectedBoxes == 9) {
+            WinDialog winDialog = new WinDialog(MainActivity.this, "Match Draw.", MainActivity.this);
+            winDialog.setCancelable(false);
+            winDialog.show();
+        }
+        else {
+            changePlayerTurn(1);
+            totalSelectedBoxes++;
+            mHandler.postDelayed(computersTurn, 1000);
+        }
+    }
+
+    private Runnable computersTurn = new Runnable() {
+        @Override
+        public void run() {
+            List<Integer> moves = getAvailableMoves();
+            Random rand = new Random();
+            int randomMove = moves.get(rand.nextInt(moves.size()));
+
+            boxPositions[randomMove] = playerTurn;
+
+            switch(randomMove) {
+                case 0:
+                    image1.setImageResource(R.drawable.cross_icon);
+                    break;
+                case 1:
+                    image2.setImageResource(R.drawable.cross_icon);
+                    break;
+                case 2:
+                    image3.setImageResource(R.drawable.cross_icon);
+                    break;
+                case 3:
+                    image4.setImageResource(R.drawable.cross_icon);
+                    break;
+                case 4:
+                    image5.setImageResource(R.drawable.cross_icon);
+                    break;
+                case 5:
+                    image6.setImageResource(R.drawable.cross_icon);
+                    break;
+                case 6:
+                    image7.setImageResource(R.drawable.cross_icon);
+                    break;
+                case 7:
+                    image8.setImageResource(R.drawable.cross_icon);
+                    break;
+                case 8:
+                    image9.setImageResource(R.drawable.cross_icon);
+            }
+
+            if(checkPlayerWin()) {
+                playerOneScore++;
+                setScore();
+                WinDialog winDialog = new WinDialog(MainActivity.this, player1 + " wins.", MainActivity.this);
+                winDialog.setCancelable(false);
+                winDialog.show();
+            }
+            else if(totalSelectedBoxes == 9) {
+                WinDialog winDialog = new WinDialog(MainActivity.this, "Match Draw.", MainActivity.this);
+                winDialog.setCancelable(false);
+                winDialog.show();
+            }
+            else {
+                changePlayerTurn(2);
+                totalSelectedBoxes++;
+            }
+        }
+    };
+
 
     private void performAction(ImageView imageView, int selectBoxPosition) {
         boxPositions[selectBoxPosition] = playerTurn;
@@ -225,17 +391,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean checkPlayerWin() {
-        boolean response = false;
-
         for(int i = 0; i < combinationsList.size(); i++) {
             final int[] combination = combinationsList.get(i);
 
             if(boxPositions[combination[0]] == playerTurn && boxPositions[combination[1]] == playerTurn && boxPositions[combination[2]] == playerTurn) {
-                response = true;
+                return true;
             }
         }
 
-        return response;
+        return false;
     }
 
     private boolean isBoxSelectable(int boxPosition) {
@@ -261,6 +425,10 @@ public class MainActivity extends AppCompatActivity {
 
         playerOneLayout.setBackgroundResource(R.drawable.round_back_blue_border);
         playerTwoLayout.setBackgroundResource(R.drawable.round_back_dark_blue);
+
+        if(isAIselected) {
+            mHandler.postDelayed(computersTurn, 400);
+        }
     }
 
     private void setScore() {
@@ -277,5 +445,4 @@ public class MainActivity extends AppCompatActivity {
             finishAndRemoveTask();
         }
     }
-
 }
