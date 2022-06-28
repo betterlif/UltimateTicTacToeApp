@@ -28,4 +28,4 @@ jobs:
      uses:actions/upload-artifact@v2
      with:
       name: aaaa App
-      path:./app/build/outputs/apk/dev/debug/some.apk
+      path: ./app/build/outputs/apk/dev/debug/some.apk
