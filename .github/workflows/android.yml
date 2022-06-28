@@ -25,7 +25,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     -name: Upload Apk Artifact
-     uses:actions/upload-artifact@v2
+     uses: actions/upload-artifact@v2
      with:
       name: aaaa App
       path: ./app/build/outputs/apk/dev/debug/some.apk
